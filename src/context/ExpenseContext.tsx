@@ -1,7 +1,6 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 
 interface WeekData {
-  week: number;
   monday: number;
   tuesday: number;
   wednesday: number;
@@ -13,17 +12,21 @@ interface WeekData {
 
 interface ExpenseContextProps {
   totalWeekExpenses: number;
-  weeklyExpensesGraphic: WeekData[];
-  todayExpenses: number;
-  percentageChange: number;
+  // weeklyExpensesGraphic: WeekData[];
+  // todayExpenses: number;
+  // percentageChange: number;
 }
 
-const ExpenseContext = createContext<ExpenseContextProps | undefined>(undefined);
+const ExpenseContext = createContext<ExpenseContextProps>({
+  totalWeekExpenses: 0,
+  // weeklyExpensesGraphic: [],
+  // todayExpenses: 0,
+  // percentageChange: 0,
+});
 
-const ExpenseProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const arrayWeeks: WeekData[] = [
     {
-      week: 1,
       monday: 10,
       tuesday: 15,
       wednesday: 20,
@@ -33,7 +36,6 @@ const ExpenseProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
       sunday: 22,
     },
     {
-      week: 2,
       monday: 12,
       tuesday: 18,
       wednesday: 22,
@@ -43,7 +45,6 @@ const ExpenseProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
       sunday: 25,
     },
     {
-      week: 3,
       monday: 15,
       tuesday: 22,
       wednesday: 26,
@@ -53,18 +54,22 @@ const ExpenseProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) =>
       sunday: 28,
     },
   ];
-  const [totalWeekExpenses, setTotalWeekExpenses] = useState<number>(0);
-  const [weeklyExpensesGraphic, setWeeklyExpenses] = useState<WeekData[]>([]);
-  const [todayExpenses, setTodayExpenses] = useState<number>(0);
-  const [percentageChange, setPercentageChange] = useState<number>(0);
+  //const [totalWeekExpenses, setTotalWeekExpenses] = useState<number>(0);
+  const totalWeekExpenses = arrayWeeks[0]
+  ? Object.values(arrayWeeks[0]).reduce((acc, value) => acc + value, 0)
+  : 0;
+  
+  // const [weeklyExpensesGraphic, setWeeklyExpenses] = useState<WeekData[]>([]);
+  // const [todayExpenses, setTodayExpenses] = useState<number>(0);
+  // const [percentageChange, setPercentageChange] = useState<number>(0);
 
   return (
     <ExpenseContext.Provider
       value={{
         totalWeekExpenses,
-        weeklyExpensesGraphic,
-        todayExpenses,
-        percentageChange,
+        // weeklyExpensesGraphic,
+        // todayExpenses,
+        // percentageChange,
       }}
     >
       {children}

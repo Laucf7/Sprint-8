@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { ExpenseContext } from '../context/ExpenseContext.tsx';
+//import React, { useContext } from 'react';
+//import { ExpenseContext } from '../context/ExpenseContext.tsx';
 
 const TodaysExpenses: React.FC = () => {
-  const { todayExpenses } = useContext(ExpenseContext);
+  //const { todayExpenses } = useContext(ExpenseContext);
 
   return (
     <div>

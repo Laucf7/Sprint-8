@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import { ExpenseContext } from '../context/ExpenseContext.tsx';
+// import React, { useContext } from 'react';
+// import { ExpenseContext } from '../context/ExpenseContext.tsx';
 
 const YesterdayTodayPercentage: React.FC = () => {
-  const { percentageChange } = useContext(ExpenseContext);
+  //const { percentageChange } = useContext(ExpenseContext);
 
   return (
     <div>
-      <h2>Yesterday-Today Percentage</h2>
+      <h2>Yesterday-Today %</h2>
       {/* Renderitza el percentatge de variació entre ahir i avui */}
     </div>
   );
