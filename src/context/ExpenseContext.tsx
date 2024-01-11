@@ -1,25 +1,27 @@
 import React, { createContext } from 'react';
 
 interface WeekData {
-  monday: number;
-  tuesday: number;
-  wednesday: number;
-  thursday: number;
-  friday: number;
-  saturday: number;
-  sunday: number;
+  Monday: number;
+  Tuesday: number;
+  Wednesday: number;
+  Thursday: number;
+  Friday: number;
+  Saturday: number;
+  Sunday: number;
 }
 
 interface ExpenseContextProps {
   totalWeekExpenses: number;
-  // weeklyExpensesGraphic: WeekData[];
+  daysData: string[];
+  expensesDayData: number[];
   // todayExpenses: number;
   // percentageChange: number;
 }
 
 const ExpenseContext = createContext<ExpenseContextProps>({
   totalWeekExpenses: 0,
-  // weeklyExpensesGraphic: [],
+  daysData: [],
+  expensesDayData: [],
   // todayExpenses: 0,
   // percentageChange: 0,
 });
@@ -27,39 +29,41 @@ const ExpenseContext = createContext<ExpenseContextProps>({
 const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const arrayWeeks: WeekData[] = [
     {
-      monday: 10,
-      tuesday: 15,
-      wednesday: 20,
-      thursday: 18,
-      friday: 25,
-      saturday: 30,
-      sunday: 22,
+      Monday: 10,
+      Tuesday: 15,
+      Wednesday: 20,
+      Thursday: 18,
+      Friday: 25,
+      Saturday: 30,
+      Sunday: 22,
     },
     {
-      monday: 12,
-      tuesday: 18,
-      wednesday: 22,
-      thursday: 20,
-      friday: 28,
-      saturday: 32,
-      sunday: 25,
+      Monday: 12,
+      Tuesday: 18,
+      Wednesday: 22,
+      Thursday: 20,
+      Friday: 28,
+      Saturday: 32,
+      Sunday: 25,
     },
     {
-      monday: 15,
-      tuesday: 22,
-      wednesday: 26,
-      thursday: 24,
-      friday: 30,
-      saturday: 35,
-      sunday: 28,
+      Monday: 15,
+      Tuesday: 22,
+      Wednesday: 26,
+      Thursday: 24,
+      Friday: 30,
+      Saturday: 35,
+      Sunday: 28,
     },
   ];
-  //const [totalWeekExpenses, setTotalWeekExpenses] = useState<number>(0);
-  const totalWeekExpenses = arrayWeeks[0]
-  ? Object.values(arrayWeeks[0]).reduce((acc, value) => acc + value, 0)
+  //agafem l'ultima setmana del array, per sempre tenir la info de la setmana més recent
+  const totalWeekExpenses = arrayWeeks.length > 0
+  ? Object.values(arrayWeeks[arrayWeeks.length - 1]).reduce((acc, value) => acc + value, 0)
   : 0;
+
+  const daysData = Object.keys(arrayWeeks[arrayWeeks.length - 1]);
+  const expensesDayData = Object.values(arrayWeeks[arrayWeeks.length - 1]);
   
-  // const [weeklyExpensesGraphic, setWeeklyExpenses] = useState<WeekData[]>([]);
   // const [todayExpenses, setTodayExpenses] = useState<number>(0);
   // const [percentageChange, setPercentageChange] = useState<number>(0);
 
@@ -67,7 +71,8 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     <ExpenseContext.Provider
       value={{
         totalWeekExpenses,
-        // weeklyExpensesGraphic,
+        daysData,
+        expensesDayData,
         // todayExpenses,
         // percentageChange,
       }}
