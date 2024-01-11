@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 
 interface WeekData {
+  [key: string]: number;
   Monday: number;
   Tuesday: number;
   Wednesday: number;
@@ -14,16 +15,16 @@ interface ExpenseContextProps {
   totalWeekExpenses: number;
   daysData: string[];
   expensesDayData: number[];
-  // todayExpenses: number;
-  // percentageChange: number;
+  todayExpenses: number;
+  percentageChange: number;
 }
 
 const ExpenseContext = createContext<ExpenseContextProps>({
   totalWeekExpenses: 0,
   daysData: [],
   expensesDayData: [],
-  // todayExpenses: 0,
-  // percentageChange: 0,
+  todayExpenses: 0,
+  percentageChange: 0,
 });
 
 const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -49,7 +50,7 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     {
       Monday: 15,
       Tuesday: 22,
-      Wednesday: 26,
+      Wednesday: 36,
       Thursday: 24,
       Friday: 30,
       Saturday: 35,
@@ -64,8 +65,16 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const daysData = Object.keys(arrayWeeks[arrayWeeks.length - 1]);
   const expensesDayData = Object.values(arrayWeeks[arrayWeeks.length - 1]);
   
-  // const [todayExpenses, setTodayExpenses] = useState<number>(0);
-  // const [percentageChange, setPercentageChange] = useState<number>(0);
+
+  let actualDay = new Date().getDay() -1;
+  actualDay = actualDay === -1 ? 6 : actualDay;
+  const todayExpenses = arrayWeeks[arrayWeeks.length - 1][Object.keys(arrayWeeks[arrayWeeks.length - 1])[actualDay]];
+ 
+  const previousDay = actualDay - 1 < 0 ? 6 : actualDay - 1;
+  const yesterdayExpenses = arrayWeeks[arrayWeeks.length - 1][Object.keys(arrayWeeks[arrayWeeks.length - 1])[previousDay]];
+  
+  const percentageChange = ((todayExpenses - yesterdayExpenses)/yesterdayExpenses)*100
+  
 
   return (
     <ExpenseContext.Provider
@@ -73,8 +82,8 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
         totalWeekExpenses,
         daysData,
         expensesDayData,
-        // todayExpenses,
-        // percentageChange,
+        todayExpenses,
+        percentageChange,
       }}
     >
       {children}

@@ -6,10 +6,12 @@ import YesterdayTodayPercentage from './YesterdayTodayPercentage.tsx';
 const Card: React.FC = () => {
 
     return (
-        <div className='bg-cover bg-stone-50 card m-2 p-5'>
+        <div className='bg-cover bg-stone-50 card m-2 p-5 my-4'>
             <WeeklyExpensesGraphic />
-            <TodaysExpenses />
-            <YesterdayTodayPercentage />
+            <div className='flex items-center justify-between'>
+                <TodaysExpenses />
+                <YesterdayTodayPercentage />
+            </div>
         </div>
     );
 };
