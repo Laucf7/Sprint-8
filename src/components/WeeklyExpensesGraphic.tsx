@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler } from "chart.js";
 import { ExpenseContext } from '../context/ExpenseContext';
+import { useTranslation } from 'react-i18next'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler);
 
 const WeeklyExpensesGraphic: React.FC = () => {
+  const { t } = useTranslation();
   const { daysData } = useContext(ExpenseContext);
   const { expensesDayData } = useContext(ExpenseContext);
 
@@ -17,7 +19,6 @@ const WeeklyExpensesGraphic: React.FC = () => {
         data: expensesDayData,
         backgroundColor: "rgba(234, 88, 12)",
         hoverBackgroundColor: "rgba(234, 88, 12, 0.5)",
-
       },
     ],
   };
@@ -51,12 +52,11 @@ const WeeklyExpensesGraphic: React.FC = () => {
 
   return (
     <div>
-      <h2 className=' mx-4'>Despeses - Última setmana</h2>
+      <h2 className=' mx-4'>{t('DespesesSetmana')} </h2>
       <div className="flex justify-center items-center m-4">
         <Bar data={data} options={options} />
       </div>
     </div>
-
   );
 };
 

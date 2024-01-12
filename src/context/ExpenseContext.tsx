@@ -1,4 +1,6 @@
 import React, { createContext } from 'react';
+import { useTranslation } from 'react-i18next'
+
 
 interface WeekData {
   [key: string]: number;
@@ -28,6 +30,7 @@ const ExpenseContext = createContext<ExpenseContextProps>({
 });
 
 const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const { t } = useTranslation();
   const arrayWeeks: WeekData[] = [
     {
       Monday: 10,
@@ -62,7 +65,7 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   ? Object.values(arrayWeeks[arrayWeeks.length - 1]).reduce((acc, value) => acc + value, 0)
   : 0;
 
-  const daysData = Object.keys(arrayWeeks[arrayWeeks.length - 1]);
+  const daysData = Object.keys(arrayWeeks[arrayWeeks.length - 1]).map(day => t(`days.${day}`));
   const expensesDayData = Object.values(arrayWeeks[arrayWeeks.length - 1]);
   
 
