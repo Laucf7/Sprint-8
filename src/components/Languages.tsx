@@ -3,6 +3,7 @@ import enFlag from '../img/enFlag.png'
 import espFlag from '../img/espFlag.png'
 import catFlag from '../img/catFlag.png'
 
+
 type Locales = {
     [key: string]: {
       flag: string;
