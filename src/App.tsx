@@ -1,4 +1,3 @@
-
 import React, { Suspense } from 'react';
 import TotalWeekExpenses from './components/TotalWeekExpenses';
 import Card from './components/Card.tsx';
