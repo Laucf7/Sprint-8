@@ -24,10 +24,8 @@ const Languages: React.FC = () => {
                     <div key={locale}>
                         <button
                             style={{
-                                fontWeight: i18n.resolvedLanguage === locale ? 'bold' : 'normal',
                                 borderRadius: '50%',
                                 overflow: 'hidden',
-                                margin: 2,
                                 border: 'none',    
                             }}
                             type="submit"
