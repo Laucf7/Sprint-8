@@ -1,0 +1,6 @@
+{
+    "rewrites": [
+      { "source": "/locales/:lng/translation.json", "destination": "/locales/:lng/translation.json" }
+    ]
+  }
+  
