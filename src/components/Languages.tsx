@@ -40,6 +40,7 @@ const Languages: React.FC<LanguagesProps> = () => {
 
 export default Languages;
 
+
 /* EL CODI FUNCIONA BE A LOCALEHOST PERO NO QUAN HO PUGEM A VERCEL O NETLIFY
 import { useTranslation } from 'react-i18next'
 import enFlag from '../img/enFlag.png'
