@@ -4,7 +4,15 @@ import { useTranslation } from 'react-i18next'
 
 const TotalWeekExpenses = (): JSX.Element => {
   const { t } = useTranslation();
-  const { totalWeekExpenses } = useContext(ExpenseContext);
+  const { totalWeekExpenses, changeWeek } = useContext(ExpenseContext);
+  
+    const handlePreviousWeek = () => {
+      changeWeek('previous');
+    };
+  
+    const handleNextWeek = () => {
+      changeWeek('next');
+    };
 
   return (
     <div className='bg-cover bg-orange-500 card m-2 py-6 px-4 font-sans'>
@@ -12,8 +20,10 @@ const TotalWeekExpenses = (): JSX.Element => {
       <div className='flex items-center justify-between'>
         <p className='mx-left m-0 px-2 text-3xl text-slate-50'>{totalWeekExpenses}€</p>
         <div>
-        <button className='bg-transparent border border-orange-400 text-white text-xl mr-2'>←</button>
-        <button className='bg-transparent border border-orange-400 text-white text-xl'>→</button>
+        <button className='bg-transparent border border-orange-400 text-white text-xl mr-2' 
+        onClick={handlePreviousWeek} >←</button>
+        <button className='bg-transparent border border-orange-400 text-white text-xl'
+        onClick={handleNextWeek}>→</button>
         </div>
       </div>
     </div>

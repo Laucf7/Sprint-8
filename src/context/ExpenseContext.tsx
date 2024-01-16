@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { useTranslation } from 'react-i18next'
 
 
@@ -19,6 +19,7 @@ interface ExpenseContextProps {
   expensesDayData: number[];
   todayExpenses: number;
   percentageChange: number;
+  changeWeek: (direction: 'previous' | 'next') => void;
 }
 
 const ExpenseContext = createContext<ExpenseContextProps>({
@@ -27,6 +28,7 @@ const ExpenseContext = createContext<ExpenseContextProps>({
   expensesDayData: [],
   todayExpenses: 0,
   percentageChange: 0,
+  changeWeek: () => {},
 });
 
 const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -60,21 +62,29 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
       Sunday: 28,
     },
   ];
-  //agafem l'ultima setmana del array, per sempre tenir la info de la setmana més recent
-  const totalWeekExpenses = arrayWeeks.length > 0
-  ? Object.values(arrayWeeks[arrayWeeks.length - 1]).reduce((acc, value) => acc + value, 0)
-  : 0;
 
-  const daysData = Object.keys(arrayWeeks[arrayWeeks.length - 1]).map(day => t(`days.${day}`));
-  const expensesDayData = Object.values(arrayWeeks[arrayWeeks.length - 1]);
+  const [currentWeekIndex, setCurrentWeekIndex] = useState<number>(arrayWeeks.length - 1);
+
+  const changeWeek = (direction: 'previous' | 'next') => {
+    if (direction === 'previous') {
+      setCurrentWeekIndex((prevIndex) => Math.max(0, prevIndex - 1));
+    } else if (direction === 'next') {
+      setCurrentWeekIndex((prevIndex) => Math.min(arrayWeeks.length - 1, prevIndex + 1));
+    }
+  };
+
+  const totalWeekExpenses = Object.values(arrayWeeks[currentWeekIndex]).reduce((acc, value) => acc + value, 0);
+
+  const daysData = Object.keys(arrayWeeks[currentWeekIndex]).map(day => t(`days.${day}`));
+  const expensesDayData = Object.values(arrayWeeks[currentWeekIndex]);
   
 
   let actualDay = new Date().getDay() -1;
   actualDay = actualDay === -1 ? 6 : actualDay;
-  const todayExpenses = arrayWeeks[arrayWeeks.length - 1][Object.keys(arrayWeeks[arrayWeeks.length - 1])[actualDay]];
+  const todayExpenses = arrayWeeks[currentWeekIndex][Object.keys(arrayWeeks[currentWeekIndex])[actualDay]];
  
   const previousDay = actualDay - 1 < 0 ? 6 : actualDay - 1;
-  const yesterdayExpenses = arrayWeeks[arrayWeeks.length - 1][Object.keys(arrayWeeks[arrayWeeks.length - 1])[previousDay]];
+  const yesterdayExpenses = arrayWeeks[currentWeekIndex][Object.keys(arrayWeeks[currentWeekIndex])[previousDay]];
   
   const percentageChange = ((todayExpenses - yesterdayExpenses)/yesterdayExpenses)*100
   
@@ -87,6 +97,7 @@ const ExpenseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
         expensesDayData,
         todayExpenses,
         percentageChange,
+        changeWeek,
       }}
     >
       {children}
