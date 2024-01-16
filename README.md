@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# INPROCODE 
+This app helps you visualize your daily and weekly expenses.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![screenshotApp](https://github.com/Laucf7/Sprint-8/blob/fa47cf9d047cfb0257f4b568eaaf03a0a88b0390/src/img/screenshotAppInprocode.png)
 
-Currently, two official plugins are available:
+## Description:
+Using this app, you can record your daily expenses and visualize them through interactive charts that display your weekly expenditures. The app supports multiple languages, allowing you to switch the interface language between English, Spanish, and Catalan.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Acces: https://sprint-8-git-main2-lauras-projects-dfb93193.vercel.app/
 
-## Expanding the ESLint configuration
+## How To Use:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# Clone this repository
+$ git clone https://github.com/Laucf7/Sprint-8.git
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# Go into the repository
+$ cd Sprint-8
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Technical Stack
+Programming Language: JavaScript/TypeScript
+Frontend Framework: React
+CSS Styling: Tailwind CSS (daisyUi)
+Testing: Jest
+Multilingualism: i18n
+Hosting/Deployment: Vercel
+Code analysis: SonarCloud
+
+
+## Project Status:
+
+### Level 1
+
+- Set up the project structure with React components and establish logic in Redux or Context.
+- Create a weekly balance and implement tests with Jest.
+- Utilize a chart library, such as charts.js, to visualize the weekly expense graph.
+- Display today's total expenses and the percentage of variation compared to yesterday.
+- Implement multilingual functionality using the i18n library.
+- Deploy the project on Vercel.
+
+### Level 2
+
+- Allow the user to adjust the week for data visualization using left and right arrows next to the total balance.
+
+### Level 3
+
+- Code audit with SonarCloud in the GitHub pipeline.
