@@ -1,7 +1,9 @@
 # INPROCODE 
 This app helps you visualize your daily and weekly expenses.
 
-![screenshotApp](https://github.com/Laucf7/Sprint-8/blob/fa47cf9d047cfb0257f4b568eaaf03a0a88b0390/src/img/screenshotAppInprocode.png)
+<img src="https://github.com/Laucf7/Sprint-8/blob/fa47cf9d047cfb0257f4b568eaaf03a0a88b0390/src/img/screenshotAppInprocode.png" alt="screenshot de la app" width="400" height="400">
+
+
 
 ## Description:
 Using this app, you can record your daily expenses and visualize them through interactive charts that display your weekly expenditures. The app supports multiple languages, allowing you to switch the interface language between English, Spanish, and Catalan.
